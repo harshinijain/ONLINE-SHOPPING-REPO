@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online costume Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color:;
+        }
+        .costume-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top:20px;
+        }
+        .costume {
+            padding: 10px;
+            border: 5px solid,#ccc;
+        }
+        button {
+            background-color: purple;
+            color:white;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Home Page -->
+    <div id="homePage">
+        <h1>Welcome to costume Store</h1><br><br>
+        <div class="costume-list">
+            <div class="costume">
+                <h2><bold>The Nightingale of Kuala Lumpur</bold></h2>
+                <button onclick="viewDetails('The Nightingale of Kuala Lumpur','$30 million')">viewDetails</button>
+            </div>
+            <div class="costume">
+                <h2>Red Diamond Abaya</h2>
+                <button onclick="viewDetails('Red Diamond Abaya', '$16 million')">ViewDetails</button>
+            </div>
+            <div class="costume">
+                <h2>Queen Letizia’s Royal Wedding Dress</h2>
+                <button onclick="viewDetails('>Queen Letizia’s Royal Wedding Dress','$10.7 million')">viewDetails</button>
+            </div>
+         </div>
+    </div>
+
+    <!-- costume Details Page -->
+    <div id="detailsPage" class="hidden">
+        <h1>costume Details</h1>
+        <p>costume Name: <span id="costumeName"></span></p>
+        <p>Price: $<span id="costumePrice"></span></p>
+        <button onclick="placeOrder()">Place Order</button>
+    </div>
+
+    <!-- Order Confirmation Page -->
+    <div id="confirmationPage" class="hidden">
+        <h1>Order Confirmed!</h1>
+        <p>Thank you for your purchase!</p>
+        <p>costume: <span id="confirmedcostume"></span></p>
+        <p>Price: $<span id="confirmedPrice"></span></p>
+    </div>
+
+    <script>
+        function viewDetails(costumeName, costumePrice) {
+            document.getElementById('homePage').classList.add('hidden');
+            document.getElementById('detailsPage').classList.remove('hidden');
+
+            document.getElementById('costumeName').innerText = costumeName;
+            document.getElementById('costumePrice').innerText = costumePrice;
+
+            localStorage.setItem('selectedcostume', costumeName);
+            localStorage.setItem('selectedPrice', costumePrice);
+        }
+
+        function placeOrder() {
+            document.getElementById('detailsPage').classList.add('hidden');
+            document.getElementById('confirmationPage').classList.remove('hidden');
+
+            document.getElementById('confirmedWatch').innerText = localStorage.getItem('selectedcostume');
+            document.getElementById('confirmedPrice').innerText = localStorage.getItem('selectedPrice');
+        }
+    </script>
+</body>
+</html>
